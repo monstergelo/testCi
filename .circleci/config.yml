@@ -9,11 +9,11 @@ jobs:
     steps:
       - checkout
       - persist_to_workspace:
-          root: ~/
+          root: .
           paths:
-            - project/build
+            - ./build
       - attach_workspace:
-          at: ~/
+          at: .
       - aws-s3/sync:
           from: build
           to: 's3://testci-monstergelo/'
