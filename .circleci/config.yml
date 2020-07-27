@@ -8,6 +8,12 @@ jobs:
       name: node/default
     steps:
       - checkout
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - build
+      - attach_workspace:
+          at: ~/
       - aws-s3/sync:
           from: build
           to: 's3://testci-monstergelo/'
