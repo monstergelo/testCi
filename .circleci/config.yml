@@ -8,6 +8,13 @@ jobs:
       name: node/default
     steps:
       - checkout
+      - aws-s3/sync:
+          from: build
+          to: 's3://testci-monstergelo'
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=86400"
+          overwrite: true
       - node/with-cache:
           steps:
             - run: npm install
@@ -16,11 +23,4 @@ workflows:
       jobs:
         - build-and-test
         - run: yarn build
-        - aws-s3/sync:
-            from: build
-            to: 's3://testci-monstergelo'
-            arguments: |
-              --acl public-read \
-              --cache-control "max-age=86400"
-            overwrite: true
 
