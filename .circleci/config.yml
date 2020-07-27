@@ -22,5 +22,4 @@ workflows:
     build-and-test:
       jobs:
         - build-and-test
-        - run: yarn build
 
